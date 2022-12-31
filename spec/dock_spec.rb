@@ -28,4 +28,17 @@ RSpec.describe Dock do
     expect(dock.rental_log).to eq(expected)
   end
 
+  it "keeps a rental log" do
+    dock.rent(kayak_1, patrick)
+    dock.rent(kayak_2, patrick)
+    dock.rent(sup_1, eugene)
+    kayak_1.add_hour
+    kayak_1.add_hour
+    expected = {
+                :card_number => "4242424242424242",
+                :amount => 40
+               }
+    expect(dock.charge(kayak_1)).to eq(expected)
+  end
+
 end
